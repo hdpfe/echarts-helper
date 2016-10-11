@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/hdpfe/hcharts/issues"
   },
-  "homepage": "https://github.com/hdpfe/hcharts#readme"
+  "homepage": "https://github.com/hdpfe/hcharts#readme",
+  "dependencies": {
+    "echarts": "^3.2.3",
+    "extend": "^3.0.0"
+  }
 }

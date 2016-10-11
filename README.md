@@ -26,7 +26,7 @@ var chart = hcharts.create({
     data:{},               //{},[] or null, when null is set,not emptyTips will show.     
     type:'bar',
     resize:true,           //(Optional)Default true
-    sort:'none',           //(Optional)Default none,['asc','desc','']
+    sort:'none',           //(Optional)Default none,['none','asc','desc']
     sortType:'auto',       //(Optional)Default auto identify,can be ['date','number','text','number-like']
     emptyTips:true,        //(Optional)Default true,show empty tips when data is empty;
     emptyText:'暂无数据',   //(Optional)empty tips 
