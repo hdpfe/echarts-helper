@@ -1,0 +1,19 @@
+{
+  "name": "hcharts",
+  "version": "1.0.0",
+  "description": "Echarts3 secondary encapsulation to support a unified data structure and encapsulates commonly used functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hdpfe/hcharts.git"
+  },
+  "author": "loviselu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hdpfe/hcharts/issues"
+  },
+  "homepage": "https://github.com/hdpfe/hcharts#readme"
+}
