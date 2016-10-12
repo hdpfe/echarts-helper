@@ -84,6 +84,7 @@ echartsHelper.create = function(opt){
         ){  
             //show empty tips
             if(opt.emptyTips){
+                chart.__empty = true;
                 showEmptyTips();
             }
         }else{
@@ -99,6 +100,9 @@ echartsHelper.create = function(opt){
             chart.__resizeTid = setTimeout(function(){
                 if(document.getElementById(domId)){
                     chart.resize();
+                    if(chart.__empty){
+                        showEmptyTips();
+                    }
                 }else{
                     window.removeEventListener('resize',chart.__resizeHandler);
                 }
