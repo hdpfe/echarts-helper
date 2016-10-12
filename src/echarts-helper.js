@@ -4,7 +4,7 @@ var extend = require('extend');
 
 var echartsInstanceExtend = {
     setData:function(data){
-        var option = hcharts.getOption(extend(this.__opt,{data:data}));
+        var option = echartsHelper.getOption(extend(this.__opt,{data:data}));
         this.hideLoading();
         this.setOption(option);
     }
@@ -84,7 +84,7 @@ echartsHelper.create = function(opt){
                 showEmptyTips();
             }
         }else{
-            var option = hcharts.getOption(opt);
+            var option = echartsHelper.getOption(opt);
             chart.setOption(option);
         }
     }
@@ -97,7 +97,22 @@ echartsHelper.create = function(opt){
  * return echarts formatted option
  */
 echartsHelper.getOption = function(opt){
-    return {}
+    var formatter = require('./formatter/'+ChartTypeMap[opt.type])
+    return formatter.getOption(opt);
+}
+
+var ChartTypeMap = {
+    "bar":"barline",
+    "barStack":"barline",
+    "barSameStack":"barline",
+    "barHori":"barline",
+    "barHoriStack":"barline",
+    "barHoriSameStack":"barline",
+    "line":"barline",
+    "lineArea":"barline",
+    "lineStack":"barline",
+    "lineAreaStack":"barline",
+    "barLine":"barline"
 }
 
 module.exports = echartsHelper;

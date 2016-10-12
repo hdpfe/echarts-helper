@@ -29,7 +29,7 @@ var chart = echartsHelper.create({
     sort:'none',           //(Optional)Default none,['none','asc','desc']
     sortType:'auto',       //(Optional)Default auto identify,can be ['date','number','text','number-like']
     emptyTips:true,        //(Optional)Default true,show empty tips when data is empty;
-    emptyText:'暂无数据',   //(Optional)empty tips 
+    emptyText:'暂无数据',   //(Optional)empty tips
     theme:'dark',          //(Optional)Default null
     echartsOption:{}       //(Optional)Default {},will merge to the generate option
 })
@@ -52,34 +52,51 @@ var option = echartsHelper.getOption({
 ## Data Structure
 ```js
 var data1 = {
-    "rows":["row1","row2"],
-    "cols":["col1","col2"],       //can be empty
-    "cells":[
-        [11,12],
-        [21,22]
+    "name":"爱好对比",
+    "rowName":"性别",
+    "rows":["男","女"],
+    "colName":"爱好",
+    "cols":["电影","音乐"],       //can be empty
+    "valueName":"记录数",
+    "stack":null,               //(Optional)Specifies the stack group
+    "yIndex":0,                 //(Optional)Specifies the value Axis
+    "values":[
+        [11,12],   //电影-男,电影-女
+        [21,22]    //音乐-男,音乐-女
     ]
 }
 
 var data2 = [
-    {   
-        "name":"series1"
-        "yIndex":0,
-        "rows":["row1","row2"],
-        "cols":[],        
-        "cells":[
-            [11],
-            [21]
-        ]
+    {
+        "name":"评论数",
+        "rowName":"性别",
+        "rows":["男","女"],
+        "valueName":"最小值",
+        "values":[11,21]
+    },
+    {
+        "valueName":"最大值",
+        "values":[110,210]
+    },
+    {
+        "valueName":"平均",
+        "values":[59,103]
+    },
+    {
+        "name":"点赞数",
+        "yIndex":1,
+        "valueName":"最小值",
+        "values":[5,10]
     },
     {   
-        "name":"series2"
         "yIndex":1,
-        "rows":["row1","row2"],
-        "cols":[],        
-        "cells":[
-            [11],
-            [21]
-        ]
+        "valueName":"最大值",
+        "values":[23,24]
+    },
+    {
+        "yIndex":1,
+        "valueName":"平均",
+        "values":[12,16]
     }
 ]
 ```
