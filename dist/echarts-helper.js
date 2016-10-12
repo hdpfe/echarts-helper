@@ -109,7 +109,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    opt = extend({},defaultOpt,opt);
 
+	    var domId = opt.dom.id;
 	    var chart = echarts.init(opt.dom);
+	    chart.__opt = opt;
+	    extend(chart,echartsInstanceExtend);
 	    
 	    function showEmptyTips(){
 	        var canvas = document.createElement('canvas');
@@ -150,8 +153,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	            chart.setOption(option);
 	        }
 	    }
-	    chart.__opt = opt;
-	    extend(chart,echartsInstanceExtend);
+
+	    //auto resize
+	    if(opt.resize){
+	        chart.__resizeHandler = function(){
+	            chart.__resizeTid && clearTimeout(chart.__resizeTid);
+	            chart.__resizeTid = setTimeout(function(){
+	                if(document.getElementById(domId)){
+	                    chart.resize();
+	                }else{
+	                    window.removeEventListener('resize',chart.__resizeHandler);
+	                }
+	            },200)
+	        }
+	        window.addEventListener('resize',chart.__resizeHandler);
+	    }
+
 	    return chart;
 	}
 
