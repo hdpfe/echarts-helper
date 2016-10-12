@@ -1,6 +1,6 @@
-console.log(hcharts)
+console.log(echartsHelper)
 
-var chart0 = hcharts.create({
+var chart0 = echartsHelper.create({
     dom:document.getElementById('chart-0'),
     data:[]
 })

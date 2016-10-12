@@ -4,24 +4,24 @@
 
 ```html
 <script src="echarts.min.js"></script>
-<script src="hcharts.min.js"></script>
+<script src="echarts-helper.min.js"></script>
 ```
 
 Or
 
 ```sh
-npm install echarts hcharts
+npm install echarts echarts-helper
 ```
 
 ```js
 var echarts = require('echarts');
-var hcharts = require('hcharts');
+var echartsHelper = require('echarts-helper');
 ```
 
 ## Usage
 ```js
 //return an hchartsInstance(extends from echartsInstance)
-var chart = hcharts.create({
+var chart = echartsHelper.create({
     dom:document.getElementById('main'),
     data:{},               //{},[] or null, when null is set,not emptyTips will show.     
     type:'bar',
@@ -43,7 +43,7 @@ var data = yield getData();
 chart.setData(data);  //show data and auto hide the loading tips
 
 //get echarts option
-var option = hcharts.getOption({
+var option = echartsHelper.getOption({
     data:{},
     type:'bar'
 })
