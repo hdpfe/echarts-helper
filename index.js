@@ -1,1 +1,1 @@
-module.exports = require('./src/hcharts')
+module.exports = require('./src/echarts-helper')

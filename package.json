@@ -1,5 +1,5 @@
 {
-  "name": "hcharts",
+  "name": "echarts-helper",
   "version": "1.0.0",
   "description": "Echarts3 secondary encapsulation to support a unified data structure and encapsulates commonly used functions",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hdpfe/hcharts.git"
+    "url": "git+https://github.com/hdpfe/echarts-helper.git"
   },
   "author": "loviselu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hdpfe/hcharts/issues"
+    "url": "https://github.com/hdpfe/echarts-helper/issues"
   },
-  "homepage": "https://github.com/hdpfe/hcharts#readme",
+  "homepage": "https://github.com/hdpfe/echarts-helper#readme",
   "dependencies": {
     "echarts": "^3.2.3",
     "extend": "^3.0.0"

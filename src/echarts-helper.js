@@ -10,12 +10,12 @@ var echartsInstanceExtend = {
     }
 }
 
-var hcharts = {}
+var echartsHelper = {}
 
 
 /**
- * return an hchartsInstance(extends from echartsInstance)
- * var chart = hcharts.create({
+ * return an extended echartsInstance
+ * var chart = echartsHelper.create({
  *    dom:document.getElementById('main'),
  *    data:{},                         //{},[] or null, when null is set,not emptyTips will show.     
  *    type:'bar',
@@ -31,8 +31,8 @@ var hcharts = {}
  *    echartsOption:{}                  //(Optional)Default {},will merge to the generate option
  * })
 **/
-hcharts.create = function(opt){
-    
+echartsHelper.create = function(opt){
+
     var defaultOpt = {
         resize:true,
         sort:'none',           
@@ -96,12 +96,11 @@ hcharts.create = function(opt){
 /**
  * return echarts formatted option
  */
-hcharts.getOption = function(opt){
+echartsHelper.getOption = function(opt){
     return {}
 }
 
-
-module.exports = hcharts;
+module.exports = echartsHelper;
 
 function isObjectEmpty(object) {
     for (var i in object) {
