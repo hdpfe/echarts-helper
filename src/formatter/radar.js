@@ -1,10 +1,8 @@
 /**
  * supports chartType:
- * pie                    //饼图,嵌套饼图
- * circle                 //环形图
+ * radar                    //雷达图
  */
 exports.getOption = function(opt){
-    var chartType = opt.type;
     var dataArr = opt.data;
     var option = {
         radar: {
