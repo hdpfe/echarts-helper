@@ -116,8 +116,6 @@ exports.getOption = function(opt){
         })
     }
 
-    console.log(option)
-
     return option;
 }
 

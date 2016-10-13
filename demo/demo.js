@@ -22,7 +22,7 @@ setTimeout(function(){
             [21,22]    //音乐-男,音乐-女
         ]
     })
-},1000)
+},2000)
 
 //==============bar====================
 var chart2 = echartsHelper.create({
@@ -266,3 +266,84 @@ var chart12 = echartsHelper.create({
         ]
     }
 })
+
+//==============pie====================
+var chart13 = echartsHelper.create({
+    dom:document.getElementById('chart-13'),
+    type:'pie',
+    data:{
+        "rowName":"性别",
+        "rows":["男","女"],
+        "valueName":"记录数",
+        "values":[11,12]
+    }
+})
+
+//==============circle====================
+var chart14 = echartsHelper.create({
+    dom:document.getElementById('chart-14'),
+    type:'circle',
+    data:{
+        "rowName":"性别",
+        "rows":["男","女"],
+        "valueName":"记录数",
+        "values":[11,12]
+    }
+})
+
+//==============pie(nested)====================
+var chart15 = echartsHelper.create({
+    dom:document.getElementById('chart-15'),
+    type:'pie',
+    data:[
+        {
+            "rowName":"性别",
+            "rows":["男","女"],
+            "valueName":"记录数",
+            "values":[11,12]
+        },
+        {
+
+            "name":"爱好",
+            "rows":["电影","看书"],
+            "cols":["男","女"],
+            "values":[
+                [5,6],
+                [2,10]
+            ]
+        }
+    ]
+})
+
+//==============radar1====================
+var chart15 = echartsHelper.create({
+    dom:document.getElementById('chart-16'),
+    type:'radar',
+    data:{
+        "name":"预算 vs 开销（Budget vs spending）",
+        "rows":["销售","管理","信息技术","客服","研发","市场"],
+        "cols":["预算","开销"],
+        "values":[
+            [4300, 10000, 28000, 35000, 50000, 19000],
+            [5000, 14000, 28000, 31000, 42000, 21000]
+        ]
+    }
+})
+
+//==============radar2====================
+var chart16 = echartsHelper.create({
+    dom:document.getElementById('chart-17'),
+    type:'radar',
+    data:[
+        {
+            "name":"预算",
+            "rows":["销售","管理","信息技术","客服","研发","市场"],
+            "values":[4300, 10000, 28000, 35000, 50000, 19000]
+        },
+        {
+            "name":"开销",
+            "values":[5000, 14000, 28000, 31000, 42000, 21000]
+        }
+    ]
+})
+

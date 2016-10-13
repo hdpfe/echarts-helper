@@ -118,6 +118,9 @@ echartsHelper.create = function(opt){
  * return echarts formatted option
  */
 echartsHelper.getOption = function(opt){
+    if(!ChartTypeMap[opt.type]){
+        throw new Error('Unsupport chart type : '+opt.type);
+    }
     var formatter = require('./formatter/'+ChartTypeMap[opt.type])
     return formatter.getOption(opt);
 }
@@ -133,7 +136,10 @@ var ChartTypeMap = {
     "lineArea":"barline",
     "lineStack":"barline",
     "lineAreaStack":"barline",
-    "barLine":"barline"
+    "barLine":"barline",
+    "pie":"pie",
+    "circle":"pie",
+    "radar":"radar"
 }
 
 module.exports = echartsHelper;

@@ -180,6 +180,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * return echarts formatted option
 	 */
 	echartsHelper.getOption = function(opt){
+	    if(!ChartTypeMap[opt.type]){
+	        throw new Error('Unsupport chart type : '+opt.type);
+	    }
 	    var formatter = __webpack_require__(4)("./"+ChartTypeMap[opt.type])
 	    return formatter.getOption(opt);
 	}
@@ -195,7 +198,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    "lineArea":"barline",
 	    "lineStack":"barline",
 	    "lineAreaStack":"barline",
-	    "barLine":"barline"
+	    "barLine":"barline",
+	    "pie":"pie",
+	    "circle":"pie",
+	    "radar":"radar"
 	}
 
 	module.exports = echartsHelper;
@@ -313,7 +319,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var map = {
 		"./barline": 5,
-		"./barline.js": 5
+		"./barline.js": 5,
+		"./pie": 6,
+		"./pie.js": 6,
+		"./radar": 7,
+		"./radar.js": 7
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -451,8 +461,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        })
 	    }
 
-	    console.log(option)
-
 	    return option;
 	}
 
@@ -464,6 +472,140 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }else{
 	        return 'line';
 	    }
+	}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	/**
+	 * supports chartType:
+	 * pie                    //饼图,嵌套饼图
+	 * circle                 //环形图
+	 */
+	exports.getOption = function(opt){
+	    var chartType = opt.type;
+	    var dataArr = opt.data;
+	    var option = {
+	        tooltip: {
+	            trigger: 'item',
+	            formatter: "{a} <br/>{b}: {c} ({d}%)"
+	        },
+	        series:[]
+	    }
+
+	    if(toString.call(dataArr) !== '[object Array]'){
+	        dataArr = [dataArr];
+	    }
+
+	    dataArr.forEach(function(data,index){
+	        var radius;
+	        var itemStyle;
+	        if(chartType === 'circle' || index > 0){
+	            radius = ['50%','65%']
+	        }else if(dataArr.length > 1 && index === 0){
+	            radius = [0,'35%']
+	            itemStyle = {
+	                normal: {
+	                    label: {
+	                        position: 'inner'
+	                    }
+	                }
+	            }
+	        }else{
+	            radius = [0,'65%']
+	        }
+
+	        var serie = {
+	            name:data.name || data.valueName,
+	            type:'pie',
+	            selectedMode:index === 0?'single':undefined,
+	            radius:radius,
+	            itemStyle:itemStyle,
+	            data:[]
+	        }
+
+	        if(!data.cols || data.cols.length === 0){
+	            data.cols = ['']
+	            data.values = [data.values];
+	        }
+	        for(var i=0;i<data.cols.length;i++){
+	            for(var j=0;j<data.values[i].length;j++){
+	                serie.data.push({
+	                    value:data.values[i][j],
+	                    name:data.rows[j]
+	                })
+	            }
+	        }
+	        
+	        option.series.push(serie);
+	    })
+
+	    return option;
+	}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	/**
+	 * supports chartType:
+	 * pie                    //饼图,嵌套饼图
+	 * circle                 //环形图
+	 */
+	exports.getOption = function(opt){
+	    var chartType = opt.type;
+	    var dataArr = opt.data;
+	    var option = {
+	        radar: {
+	            indicator:[]
+	        },
+	        series:[]
+	    }
+
+	    if(toString.call(dataArr) !== '[object Array]'){
+	        dataArr = [dataArr];
+	    }
+
+	    var indicatorMax = [];
+
+	    dataArr.forEach(function(data,index){
+	        var serie = {
+	            type:'radar',
+	            name:data.name || data.valueName,
+	            data:[]
+	        }
+
+	        if(!data.cols || data.cols.length === 0){
+	            data.cols = ['']
+	            data.values = [data.values];
+	        }
+	        
+	        for(var i=0;i<data.cols.length;i++){
+	            for(var j=0;j<data.values[i].length;j++){
+	                indicatorMax[j] = Math.max(indicatorMax[j] || 0 ,data.values[i][j])
+	            }
+	            serie.data.push({
+	                value:data.values[i],
+	                name:data.cols[i] || data.name || data.valueName
+	            })
+	        }
+	        
+	        option.series.push(serie);
+	    })
+
+
+	    //set indicator
+	    for(var i=0;i<dataArr[0].rows.length;i++){
+	        option.radar.indicator.push({
+	            name:dataArr[0].rows[i],
+	            max:indicatorMax[i] / 9 * 10
+	        })
+	    }
+
+	    console.log(option)
+
+	    return option;
 	}
 
 /***/ }

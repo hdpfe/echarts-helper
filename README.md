@@ -116,7 +116,7 @@ lineStack              //堆积折线图
 lineAreaStack          //堆积面积图
 barLine                //柱线图(双y轴)
 map                    //地域分布图,会自动识别是省份还是城市显示为分布图还是散点图
-pie                    //饼图
+pie                    //饼图,嵌套饼图
 circle                 //环形图
 radar                  //雷达图
 heatmap                //热力图
