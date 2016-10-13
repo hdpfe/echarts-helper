@@ -18,6 +18,9 @@ var echarts = require('echarts');
 var echartsHelper = require('echarts-helper');
 ```
 
+## Demo
+[https://hdpfe.github.io/echarts-helper/](https://hdpfe.github.io/echarts-helper/)
+
 ## Usage
 ```js
 //return an hchartsInstance(extends from echartsInstance)
