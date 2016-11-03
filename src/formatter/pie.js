@@ -5,7 +5,7 @@
  */
 exports.getOption = function(opt){
     var chartType = opt.type;
-    var dataArr = opt.data;
+    var data = opt.data;
     var option = {
         tooltip: {
             trigger: 'item',
@@ -14,16 +14,12 @@ exports.getOption = function(opt){
         series:[]
     }
 
-    if(toString.call(dataArr) !== '[object Array]'){
-        dataArr = [dataArr];
-    }
-
-    dataArr.forEach(function(data,index){
+    data.series.forEach(function(se,index){
         var radius;
         var itemStyle;
         if(chartType === 'circle' || index > 0){
             radius = ['50%','65%']
-        }else if(dataArr.length > 1 && index === 0){
+        }else if(data.series.length > 1 && index === 0){
             radius = [0,'35%']
             itemStyle = {
                 normal: {
@@ -37,7 +33,7 @@ exports.getOption = function(opt){
         }
 
         var serie = {
-            name:data.name || data.valueName,
+            name:se.dataName || se.name,
             type:'pie',
             selectedMode:index === 0?'single':undefined,
             radius:radius,
@@ -45,17 +41,11 @@ exports.getOption = function(opt){
             data:[]
         }
 
-        if(!data.cols || data.cols.length === 0){
-            data.cols = ['']
-            data.values = [data.values];
-        }
-        for(var i=0;i<data.cols.length;i++){
-            for(var j=0;j<data.values[i].length;j++){
-                serie.data.push({
-                    value:data.values[i][j],
-                    name:data.rows[j]
-                })
-            }
+        for(var j=0;j<data.category.data.length;j++){
+            serie.data.push({
+                value:se.data[j],
+                name:data.category.data[j]
+            })
         }
         
         option.series.push(serie);

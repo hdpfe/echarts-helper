@@ -359,7 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	exports.getOption = function(opt){
 	    var chartType = opt.type;
-	    var dataArr = opt.data;
+	    var data = opt.data;
 	    var option = {
 	        tooltip:{
 	            trigger:'axis'
@@ -369,15 +369,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        series:[]
 	    }
 
-	    if(toString.call(dataArr) !== '[object Array]'){
-	        dataArr = [dataArr];
-	    }
-
 	    var categoryAxis = [
 	        {
 	            type : 'category',
-	            name:dataArr[0].rowName,
-	            data:dataArr[0].rows,
+	            name:data.category.name,
+	            data:data.category.data,
 	            axisLabel:{
 	                interval:'auto',
 	                rotate:0
@@ -400,34 +396,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        option.xAxis[0].boundaryGap = false;
 	    }
 
-	    dataArr.forEach(function(data,index){
+	    data.series.forEach(function(se,index){
 	        
-	        if(!valueAxis[data.yIndex|| 0]){
-	            valueAxis[data.yIndex|| 0] = {
+	        if(!valueAxis[se.axisIndex|| 0]){
+	            valueAxis[se.axisIndex|| 0] = {
 	                type:'value'
 	            }
 	        }
-	        if(!valueAxis[data.yIndex || 0].name){
-	            valueAxis[data.yIndex || 0].name = data.name || data.valueName;
+	        if(!valueAxis[se.axisIndex || 0].name){
+	            valueAxis[se.axisIndex || 0].name = se.axisName;
 	        }
 	        
-	        if(!data.cols || data.cols.length === 0){
-	            data.cols = [''];
-	            data.values = [data.values]
+	        var serie = {
+	            name:se.dataName || se.name,
+	            type:getSeriesType(chartType,se.axisIndex || 0),
+	            stack:se.stack,
+	            data:se.data,
+	            yAxisIndex:se.axisIndex || 0
 	        }
-	        for(var i=0;i<data.cols.length;i++){
-	            var serie = {
-	                name:data.cols[i] || data.name || data.valueName,
-	                type:getSeriesType(chartType,data.yIndex || 0),
-	                stack:data.stack,
-	                data:[],
-	                yAxisIndex:data.yIndex || 0
-	            }
-	            for(var j=0;j<data.values[i].length;j++){
-	                serie.data.push(data.values[i][j])
-	            }
-	            option.series.push(serie);
-	        }
+	   
+	        option.series.push(serie);
 	    })
 
 	    //处理一下堆积和面积的情况
@@ -485,7 +473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	exports.getOption = function(opt){
 	    var chartType = opt.type;
-	    var dataArr = opt.data;
+	    var data = opt.data;
 	    var option = {
 	        tooltip: {
 	            trigger: 'item',
@@ -494,16 +482,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        series:[]
 	    }
 
-	    if(toString.call(dataArr) !== '[object Array]'){
-	        dataArr = [dataArr];
-	    }
-
-	    dataArr.forEach(function(data,index){
+	    data.series.forEach(function(se,index){
 	        var radius;
 	        var itemStyle;
 	        if(chartType === 'circle' || index > 0){
 	            radius = ['50%','65%']
-	        }else if(dataArr.length > 1 && index === 0){
+	        }else if(data.series.length > 1 && index === 0){
 	            radius = [0,'35%']
 	            itemStyle = {
 	                normal: {
@@ -517,7 +501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        var serie = {
-	            name:data.name || data.valueName,
+	            name:se.dataName || se.name,
 	            type:'pie',
 	            selectedMode:index === 0?'single':undefined,
 	            radius:radius,
@@ -525,17 +509,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            data:[]
 	        }
 
-	        if(!data.cols || data.cols.length === 0){
-	            data.cols = ['']
-	            data.values = [data.values];
-	        }
-	        for(var i=0;i<data.cols.length;i++){
-	            for(var j=0;j<data.values[i].length;j++){
-	                serie.data.push({
-	                    value:data.values[i][j],
-	                    name:data.rows[j]
-	                })
-	            }
+	        for(var j=0;j<data.category.data.length;j++){
+	            serie.data.push({
+	                value:se.data[j],
+	                name:data.category.data[j]
+	            })
 	        }
 	        
 	        option.series.push(serie);
@@ -553,55 +531,47 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * radar                    //雷达图
 	 */
 	exports.getOption = function(opt){
-	    var dataArr = opt.data;
+	    var data = opt.data;
 	    var option = {
 	        radar: {
 	            indicator:[]
 	        },
+	        tooltip:{},
 	        series:[]
 	    }
 
-	    if(toString.call(dataArr) !== '[object Array]'){
-	        dataArr = [dataArr];
-	    }
 
 	    var indicatorMax = [];
 
-	    dataArr.forEach(function(data,index){
+	    data.series.forEach(function(se,index){
 	        var serie = {
 	            type:'radar',
-	            name:data.name || data.valueName,
+	            name:se.dataName || se.name,
 	            data:[]
 	        }
 
-	        if(!data.cols || data.cols.length === 0){
-	            data.cols = ['']
-	            data.values = [data.values];
+	        for(var i=0;i<se.data.length;i++){
+	            indicatorMax[i] = Math.max(indicatorMax[i] || 0 ,se.data[i])
+
+	           
 	        }
-	        
-	        for(var i=0;i<data.cols.length;i++){
-	            for(var j=0;j<data.values[i].length;j++){
-	                indicatorMax[j] = Math.max(indicatorMax[j] || 0 ,data.values[i][j])
-	            }
-	            serie.data.push({
-	                value:data.values[i],
-	                name:data.cols[i] || data.name || data.valueName
-	            })
-	        }
+
+	         serie.data.push({
+	            value:se.data,
+	            name:se.dataName
+	        })
 	        
 	        option.series.push(serie);
 	    })
 
 
 	    //set indicator
-	    for(var i=0;i<dataArr[0].rows.length;i++){
+	    for(var i=0;i<data.category.data.length;i++){
 	        option.radar.indicator.push({
-	            name:dataArr[0].rows[i],
-	            max:indicatorMax[i] / 9 * 10
+	            name:data.category.data[i],
+	            max:parseInt(indicatorMax[i] / 9 * 10,10)
 	        })
 	    }
-
-	    console.log(option)
 
 	    return option;
 	}

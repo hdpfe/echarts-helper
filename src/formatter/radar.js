@@ -3,55 +3,47 @@
  * radar                    //雷达图
  */
 exports.getOption = function(opt){
-    var dataArr = opt.data;
+    var data = opt.data;
     var option = {
         radar: {
             indicator:[]
         },
+        tooltip:{},
         series:[]
     }
 
-    if(toString.call(dataArr) !== '[object Array]'){
-        dataArr = [dataArr];
-    }
 
     var indicatorMax = [];
 
-    dataArr.forEach(function(data,index){
+    data.series.forEach(function(se,index){
         var serie = {
             type:'radar',
-            name:data.name || data.valueName,
+            name:se.dataName || se.name,
             data:[]
         }
 
-        if(!data.cols || data.cols.length === 0){
-            data.cols = ['']
-            data.values = [data.values];
+        for(var i=0;i<se.data.length;i++){
+            indicatorMax[i] = Math.max(indicatorMax[i] || 0 ,se.data[i])
+
+           
         }
-        
-        for(var i=0;i<data.cols.length;i++){
-            for(var j=0;j<data.values[i].length;j++){
-                indicatorMax[j] = Math.max(indicatorMax[j] || 0 ,data.values[i][j])
-            }
-            serie.data.push({
-                value:data.values[i],
-                name:data.cols[i] || data.name || data.valueName
-            })
-        }
+
+         serie.data.push({
+            value:se.data,
+            name:se.dataName
+        })
         
         option.series.push(serie);
     })
 
 
     //set indicator
-    for(var i=0;i<dataArr[0].rows.length;i++){
+    for(var i=0;i<data.category.data.length;i++){
         option.radar.indicator.push({
-            name:dataArr[0].rows[i],
-            max:indicatorMax[i] / 9 * 10
+            name:data.category.data[i],
+            max:parseInt(indicatorMax[i] / 9 * 10,10)
         })
     }
-
-    console.log(option)
 
     return option;
 }

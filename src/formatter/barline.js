@@ -14,7 +14,7 @@
  */
 exports.getOption = function(opt){
     var chartType = opt.type;
-    var dataArr = opt.data;
+    var data = opt.data;
     var option = {
         tooltip:{
             trigger:'axis'
@@ -24,15 +24,11 @@ exports.getOption = function(opt){
         series:[]
     }
 
-    if(toString.call(dataArr) !== '[object Array]'){
-        dataArr = [dataArr];
-    }
-
     var categoryAxis = [
         {
             type : 'category',
-            name:dataArr[0].rowName,
-            data:dataArr[0].rows,
+            name:data.category.name,
+            data:data.category.data,
             axisLabel:{
                 interval:'auto',
                 rotate:0
@@ -55,34 +51,26 @@ exports.getOption = function(opt){
         option.xAxis[0].boundaryGap = false;
     }
 
-    dataArr.forEach(function(data,index){
+    data.series.forEach(function(se,index){
         
-        if(!valueAxis[data.yIndex|| 0]){
-            valueAxis[data.yIndex|| 0] = {
+        if(!valueAxis[se.axisIndex|| 0]){
+            valueAxis[se.axisIndex|| 0] = {
                 type:'value'
             }
         }
-        if(!valueAxis[data.yIndex || 0].name){
-            valueAxis[data.yIndex || 0].name = data.name || data.valueName;
+        if(!valueAxis[se.axisIndex || 0].name){
+            valueAxis[se.axisIndex || 0].name = se.axisName;
         }
         
-        if(!data.cols || data.cols.length === 0){
-            data.cols = [''];
-            data.values = [data.values]
+        var serie = {
+            name:se.dataName || se.name,
+            type:getSeriesType(chartType,se.axisIndex || 0),
+            stack:se.stack,
+            data:se.data,
+            yAxisIndex:se.axisIndex || 0
         }
-        for(var i=0;i<data.cols.length;i++){
-            var serie = {
-                name:data.cols[i] || data.name || data.valueName,
-                type:getSeriesType(chartType,data.yIndex || 0),
-                stack:data.stack,
-                data:[],
-                yAxisIndex:data.yIndex || 0
-            }
-            for(var j=0;j<data.values[i].length;j++){
-                serie.data.push(data.values[i][j])
-            }
-            option.series.push(serie);
-        }
+   
+        option.series.push(serie);
     })
 
     //处理一下堆积和面积的情况

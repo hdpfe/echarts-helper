@@ -12,14 +12,19 @@ var chart1 = echartsHelper.create({
 chart1.showLoading();
 setTimeout(function(){
     chart1.setData({
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [21,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     })
 },2000)
@@ -29,11 +34,16 @@ var chart2 = echartsHelper.create({
     dom:document.getElementById('chart-2'),
     type:'bar',
     data:{
-        "name":"性别分布统计",
-        "rowName":"性别",
-        "rows":["男","女"],
-        "valueName":"记录数",
-        "values":[11,23]
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"记录数",
+                "data":[11,21]
+            }
+        ]
     }
 })
 
@@ -41,62 +51,73 @@ var chart2 = echartsHelper.create({
 var chart3 = echartsHelper.create({
     dom:document.getElementById('chart-3'),
     type:'line',
-    data:[
-        {
-            "name":"评论数",
-            "rowName":"性别",
-            "rows":["男","女"],
-            "valueName":"最小值",
-            "values":[11,21]
+    data:{
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
         },
-        {
-            "valueName":"最大值",
-            "values":[110,210]
-        },
-        {
-            "valueName":"平均",
-            "values":[59,103]
-        }
-    ]
+        "series":[
+            {
+                "axisName":"评论数",
+                "axisIndex":0,                 //(Optional)default 0
+                "dataName":"最小值",
+                "data":[11,21]
+            },
+            {
+                "dataName":"最大值",
+                "data":[110,210]
+            },
+            {
+                "dataName":"平均",
+                "data":[59,103]
+            }
+        ]
+    }
 })
 
 //barline
 var chart4 = echartsHelper.create({
     dom:document.getElementById('chart-4'),
     type:'barLine',
-    data:[
-        {
-            "name":"评论数",
-            "rowName":"性别",
-            "rows":["男","女"],
-            "valueName":"最小值",
-            "values":[11,21]
+    data:{
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
         },
-        {
-            "valueName":"最大值",
-            "values":[110,210]
-        },
-        {
-            "valueName":"平均",
-            "values":[59,103]
-        },
-        {
-            "name":"点赞数",
-            "yIndex":1,
-            "valueName":"最小值",
-            "values":[5,10]
-        },
-        {   
-            "yIndex":1,
-            "valueName":"最大值",
-            "values":[23,24]
-        },
-        {
-            "yIndex":1,
-            "valueName":"平均",
-            "values":[12,16]
-        }
-    ]
+        "series":[
+            {
+                "axisName":"评论数",
+                "axisIndex":0,                 //(Optional)default 0
+                "stack":null,                  //(Optional)Specifies the stack group
+                "dataName":"最小值",
+                "data":[11,21]
+            },
+            {
+                "dataName":"最大值",
+                "data":[110,210]
+            },
+            {
+                "dataName":"平均",
+                "data":[59,103]
+            },
+            {
+                "name":"点赞数",
+                "axisIndex":1,
+                "dataName":"最小值",
+                "data":[5,10]
+            },
+            {   
+                "axisIndex":1,
+                "dataName":"最大值",
+                "data":[23,24]
+            },
+            {
+                "axisIndex":1,
+                "dataName":"平均",
+                "data":[12,16]
+            }
+        ]
+    }
 })
 
 
@@ -104,47 +125,51 @@ var chart4 = echartsHelper.create({
 var chart5 = echartsHelper.create({
     dom:document.getElementById('chart-5'),
     type:'barStack',
-    data:[
-        {
-            "name":"直接访问",
-            "rows":['周一','周二','周三','周四','周五','周六','周日'],
-            "values":[320, 332, 301, 334, 390, 330, 320]
+    data:{
+        "category":{
+            "data":['周一','周二','周三','周四','周五','周六','周日']
         },
-        {
-            "valueName":"邮件营销",
-            "stack":"广告",
-            "values":[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            "valueName":"联盟广告",
-            "stack":"广告",
-            "values":[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            "valueName":"搜索引擎",
-            "values":[862, 1018, 964, 1026, 1679, 1600, 1570]
-        },
-        {
-            "valueName":"百度",
-            "stack":"搜索引擎",
-            "values":[620, 732, 701, 734, 1090, 1130, 1120]
-        },
-        {
-            "valueName":"谷歌",
-            "stack":"搜索引擎",
-            "values":[120, 132, 101, 134, 290, 230, 220]
-        },
-        {
-            "valueName":"必应",
-            "stack":"搜索引擎",
-            "values":[60, 72, 71, 74, 190, 130, 110]
-        },
-        {
-            "valueName":"其他",
-            "stack":"搜索引擎",
-            "values":[62, 82, 91, 84, 109, 110, 120]
-        }
-    ]
+        "series":[
+            {
+                "dataName":"直接访问",
+                "data":[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                "dataName":"邮件营销",
+                "stack":"广告",
+                "data":[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                "dataName":"联盟广告",
+                "stack":"广告",
+                "data":[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                "dataName":"搜索引擎",
+                "data":[862, 1018, 964, 1026, 1679, 1600, 1570]
+            },
+            {
+                "dataName":"百度",
+                "stack":"搜索引擎",
+                "data":[620, 732, 701, 734, 1090, 1130, 1120]
+            },
+            {
+                "dataName":"谷歌",
+                "stack":"搜索引擎",
+                "data":[120, 132, 101, 134, 290, 230, 220]
+            },
+            {
+                "dataName":"必应",
+                "stack":"搜索引擎",
+                "data":[60, 72, 71, 74, 190, 130, 110]
+            },
+            {
+                "dataName":"其他",
+                "stack":"搜索引擎",
+                "data":[62, 82, 91, 84, 109, 110, 120]
+            }
+        ]
+    }
 })
 
 
@@ -153,14 +178,19 @@ var chart6 = echartsHelper.create({
     dom:document.getElementById('chart-6'),
     type:'barSameStack',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [21,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -170,14 +200,19 @@ var chart7 = echartsHelper.create({
     dom:document.getElementById('chart-7'),
     type:'barHori',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [21,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -187,14 +222,19 @@ var chart8 = echartsHelper.create({
     dom:document.getElementById('chart-8'),
     type:'barHoriStack',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [21,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -204,14 +244,19 @@ var chart9 = echartsHelper.create({
     dom:document.getElementById('chart-9'),
     type:'barHoriSameStack',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [21,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -221,14 +266,19 @@ var chart10 = echartsHelper.create({
     dom:document.getElementById('chart-10'),
     type:'lineArea',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [5,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -238,14 +288,19 @@ var chart11 = echartsHelper.create({
     dom:document.getElementById('chart-11'),
     type:'lineStack',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [5,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -255,14 +310,19 @@ var chart12 = echartsHelper.create({
     dom:document.getElementById('chart-12'),
     type:'lineAreaStack',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "colName":"爱好",
-        "cols":["电影","音乐"],       //can be empty
-        "valueName":"记录数",
-        "values":[
-            [11,12],   //电影-男,电影-女
-            [5,22]    //音乐-男,音乐-女
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
@@ -272,10 +332,16 @@ var chart13 = echartsHelper.create({
     dom:document.getElementById('chart-13'),
     type:'pie',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "valueName":"记录数",
-        "values":[11,12]
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"记录数",
+                "data":[11,21]
+            }
+        ]
     }
 })
 
@@ -284,10 +350,16 @@ var chart14 = echartsHelper.create({
     dom:document.getElementById('chart-14'),
     type:'circle',
     data:{
-        "rowName":"性别",
-        "rows":["男","女"],
-        "valueName":"记录数",
-        "values":[11,12]
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"记录数",
+                "data":[11,21]
+            }
+        ]
     }
 })
 
@@ -295,55 +367,41 @@ var chart14 = echartsHelper.create({
 var chart15 = echartsHelper.create({
     dom:document.getElementById('chart-15'),
     type:'pie',
-    data:[
-        {
-            "rowName":"性别",
-            "rows":["男","女"],
-            "valueName":"记录数",
-            "values":[11,12]
-        },
-        {
-
-            "name":"爱好",
-            "rows":["电影","看书"],
-            "cols":["男","女"],
-            "values":[
-                [5,6],
-                [2,10]
-            ]
-        }
-    ]
-})
-
-//==============radar1====================
-var chart15 = echartsHelper.create({
-    dom:document.getElementById('chart-16'),
-    type:'radar',
     data:{
-        "name":"预算 vs 开销（Budget vs spending）",
-        "rows":["销售","管理","信息技术","客服","研发","市场"],
-        "cols":["预算","开销"],
-        "values":[
-            [4300, 10000, 28000, 35000, 50000, 19000],
-            [5000, 14000, 28000, 31000, 42000, 21000]
+        "category":{
+            "name":"性别",
+            "data":["男","女"]
+        },
+        "series":[
+            {
+                "dataName":"电影",
+                "data":[11,21]
+            },
+            {
+                "dataName":"音乐",
+                "data":[21,22]
+            }
         ]
     }
 })
 
-//==============radar2====================
-var chart16 = echartsHelper.create({
-    dom:document.getElementById('chart-17'),
+//==============radar====================
+var chart15 = echartsHelper.create({
+    dom:document.getElementById('chart-16'),
     type:'radar',
-    data:[
-        {
-            "name":"预算",
-            "rows":["销售","管理","信息技术","客服","研发","市场"],
-            "values":[4300, 10000, 28000, 35000, 50000, 19000]
+    data:{
+        "category":{
+            "data":["销售","管理","信息技术","客服","研发","市场"]
         },
-        {
-            "name":"开销",
-            "values":[5000, 14000, 28000, 31000, 42000, 21000]
-        }
-    ]
+        "series":[
+            {
+                "dataName":"预算",
+                "data":[4300, 10000, 28000, 35000, 50000, 19000]
+            },
+            {
+                "dataName":"开销",
+                "data":[5000, 14000, 28000, 31000, 42000, 21000]
+            }
+        ]
+    }
 })
-

@@ -54,54 +54,46 @@ var option = echartsHelper.getOption({
 
 ## Data Structure
 ```js
-var data1 = {
-    "name":"爱好对比",
-    "rowName":"性别",
-    "rows":["男","女"],
-    "colName":"爱好",
-    "cols":["电影","音乐"],       //can be empty
-    "valueName":"记录数",
-    "stack":null,               //(Optional)Specifies the stack group
-    "yIndex":0,                 //(Optional)Specifies the value Axis
-    "values":[
-        [11,12],   //电影-男,电影-女
-        [21,22]    //音乐-男,音乐-女
+
+var data = {
+    "category":{
+        "name":"性别",
+        "data":["男","女"]
+    },
+    "series":[
+        {
+            "axisName":"评论数",
+            "axisIndex":0,                 //(Optional)default 0
+            "stack":null,                  //(Optional)Specifies the stack group
+            "dataName":"最小值",
+            "data":[11,21]
+        },
+        {
+            "dataName":"最大值",
+            "data":[110,210]
+        },
+        {
+            "dataName":"平均",
+            "data":[59,103]
+        },
+        {
+            "axisName":"点赞数",
+            "axisIndex":1,
+            "dataName":"最小值",
+            "data":[5,10]
+        },
+        {   
+            "axisIndex":1,
+            "dataName":"最大值",
+            "data":[23,24]
+        },
+        {
+            "axisIndex":1,
+            "dataName":"平均",
+            "data":[12,16]
+        }
     ]
 }
-
-var data2 = [
-    {
-        "name":"评论数",
-        "rowName":"性别",
-        "rows":["男","女"],
-        "valueName":"最小值",
-        "values":[11,21]
-    },
-    {
-        "valueName":"最大值",
-        "values":[110,210]
-    },
-    {
-        "valueName":"平均",
-        "values":[59,103]
-    },
-    {
-        "name":"点赞数",
-        "yIndex":1,
-        "valueName":"最小值",
-        "values":[5,10]
-    },
-    {   
-        "yIndex":1,
-        "valueName":"最大值",
-        "values":[23,24]
-    },
-    {
-        "yIndex":1,
-        "valueName":"平均",
-        "values":[12,16]
-    }
-]
 ```
 
 ## Support Chart Type
@@ -122,6 +114,4 @@ map                    //地域分布图,会自动识别是省份还是城市显
 pie                    //饼图,嵌套饼图
 circle                 //环形图
 radar                  //雷达图
-heatmap                //热力图
-scatter                //散点图
 ```
