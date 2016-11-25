@@ -1,6 +1,6 @@
 {
   "name": "echarts-helper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Echarts3 secondary encapsulation to support a unified data structure and encapsulates commonly used functions",
   "main": "index.js",
   "scripts": {
