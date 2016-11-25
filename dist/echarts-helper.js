@@ -107,10 +107,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },   
 	        echartsOption:{}
 	    }
-	    opt = extend({},defaultOpt,opt);
+	    opt = extend(opt,defaultOpt);
 
 	    var domId = opt.dom.id;
-	    var chart = echarts.init(opt.dom);
+	    var chart = echarts.init(opt.dom, opt.theme);
 	    chart.__opt = opt;
 	    extend(chart,echartsInstanceExtend);
 	    
