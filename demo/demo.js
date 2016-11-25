@@ -33,6 +33,7 @@ setTimeout(function(){
 var chart2 = echartsHelper.create({
     dom:document.getElementById('chart-2'),
     type:'bar',
+    theme: 'vintage',
     data:{
         "category":{
             "name":"性别",
