@@ -45,7 +45,7 @@ echartsHelper.create = function(opt){
         },   
         echartsOption:{}
     }
-    opt = extend(opt,defaultOpt);
+    opt = extend({},defaultOpt,opt);
 
     var domId = opt.dom.id;
     var chart = echarts.init(opt.dom, opt.theme);
@@ -122,7 +122,9 @@ echartsHelper.getOption = function(opt){
         throw new Error('Unsupport chart type : '+opt.type);
     }
     var formatter = require('./formatter/'+ChartTypeMap[opt.type])
-    return formatter.getOption(opt);
+    console.log(opt)
+    console.log(extend(formatter.getOption(opt),opt.echartsOption))
+    return extend(formatter.getOption(opt),opt.echartsOption);
 }
 
 var ChartTypeMap = {

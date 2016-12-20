@@ -8,6 +8,7 @@ var chart0 = echartsHelper.create({
 var chart1 = echartsHelper.create({
     dom:document.getElementById('chart-1'),
     type:'bar'
+    
 })
 chart1.showLoading();
 setTimeout(function(){
@@ -52,6 +53,21 @@ var chart2 = echartsHelper.create({
 var chart3 = echartsHelper.create({
     dom:document.getElementById('chart-3'),
     type:'line',
+    echartsOption:{
+        legend:{
+            data:[
+                {
+                    name:"最小值"
+                },
+                {
+                    name:"最大值"
+                },
+                {
+                    name:"平均"
+                }
+            ]
+        }
+    },
     data:{
         "category":{
             "name":"性别",
