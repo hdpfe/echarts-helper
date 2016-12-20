@@ -1,8 +1,8 @@
 {
   "name": "echarts-helper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Echarts3 secondary encapsulation to support a unified data structure and encapsulates commonly used functions",
-  "main": "index.js",
+  "main": "./dist/echarts-helper.js",
   "scripts": {
     "build": "webpack && webpack -p"
   },
@@ -17,7 +17,5 @@
   },
   "homepage": "https://github.com/hdpfe/echarts-helper#readme",
   "dependencies": {
-    "echarts": "^3.2.3",
-    "extend": "^3.0.0"
   }
 }
