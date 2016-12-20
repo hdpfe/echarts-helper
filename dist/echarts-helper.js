@@ -111,6 +111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var domId = opt.dom.id;
 	    var chart = echarts.init(opt.dom, opt.theme);
+
 	    chart.__opt = opt;
 	    extend(chart,echartsInstanceExtend);
 	    
@@ -184,8 +185,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw new Error('Unsupport chart type : '+opt.type);
 	    }
 	    var formatter = __webpack_require__(4)("./"+ChartTypeMap[opt.type])
-	    console.log(opt)
-	    console.log(extend(formatter.getOption(opt),opt.echartsOption))
 	    return extend(formatter.getOption(opt),opt.echartsOption);
 	}
 

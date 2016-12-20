@@ -1,3 +1,5 @@
+
+
 //========empty tips===========
 var chart0 = echartsHelper.create({
     dom:document.getElementById('chart-0'),
@@ -34,7 +36,7 @@ setTimeout(function(){
 var chart2 = echartsHelper.create({
     dom:document.getElementById('chart-2'),
     type:'bar',
-    theme: 'vintage',
+    theme: 'skynet',
     data:{
         "category":{
             "name":"性别",
@@ -53,6 +55,7 @@ var chart2 = echartsHelper.create({
 var chart3 = echartsHelper.create({
     dom:document.getElementById('chart-3'),
     type:'line',
+    theme: 'skynet',
     echartsOption:{
         legend:{
             data:[
@@ -348,6 +351,7 @@ var chart12 = echartsHelper.create({
 var chart13 = echartsHelper.create({
     dom:document.getElementById('chart-13'),
     type:'pie',
+    theme: "skynet",
     data:{
         "category":{
             "name":"性别",
